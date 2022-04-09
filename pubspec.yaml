@@ -1,0 +1,19 @@
+name: hikari
+description: Dartを100%生かした（つもりの）サーバサイドWebフレームワーク
+repository: https://github.com/kentt8046/hikari
+issue_tracker: https://github.com/kentt8046/hikari/issues
+platforms:
+  linux:
+  macos:
+  windows:
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+# dependencies:
+#   path: ^1.8.0
+
+dev_dependencies:
+  coverage: ^1.0.0
+  lints: ^1.0.0
+  test: ^1.16.0

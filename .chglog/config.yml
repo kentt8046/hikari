@@ -1,0 +1,42 @@
+style: github
+template: CHANGELOG.tpl.md
+info:
+  title: CHANGELOG
+  repository_url: https://github.com/kentt8046/hikari
+options:
+  commits:
+    filters:
+      Type:
+        - feat
+        - fix
+        - perf
+        - refactor
+        - test
+        - style
+        - doc
+        - chore
+    sort_by: Scope
+  commit_groups:
+    group_by: Type
+    sort_by: Title
+    title_maps:
+      feat: Features
+      fix: Bug Fixes
+      perf: Performance Improvements
+      refactor: Code Refactoring
+      test: Tests
+      style: Code Style
+      doc: Documentation
+      chore: Chores
+  header:
+    pattern: "^(\\w*)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\:\\s(.*)$"
+    pattern_maps:
+      - Type
+      - Scope
+      - Subject
+  issues:
+    prefix:
+      - "#"
+  notes:
+    keywords:
+      - BREAKING CHANGE

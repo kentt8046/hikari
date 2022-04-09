@@ -1,0 +1,53 @@
+name: Workflow for Codecov
+on: [push]
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        sdk: [stable, beta, 2.16.2]
+    env:
+      OS: ${{ matrix.os }}
+      DART_SDK: ${{ matrix.sdk }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+
+      - name: Cache packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.PUB_CACHE }}
+            .dart_tool
+          key: pub-cache-${{ matrix.os }}-${{ matrix.sdk }}
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Check formatting
+        run: dart format --set-exit-if-changed .
+
+      - name: Analyze code
+        run: dart analyze --fatal-warnings .
+
+      - name: Run tests
+        run: dart test --coverage=.coverage/
+
+      - name: Generate coverage report
+        run: dart run coverage:format_coverage --lcov --in=.coverage --out=.coverage/lcov.info --packages=.packages --report-on=lib
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          name: codecov-umbrella
+          token: ${{ secrets.CODECOV_TOKEN }}
+          env_vars: OS,DART_SDK
+          fail_ci_if_error: true
+          files: ./.coverage/lcov.info
+          flags: unittests
+          verbose: true
