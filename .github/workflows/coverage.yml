@@ -24,6 +24,7 @@ jobs:
           path: |
             ${{ env.PUB_CACHE }}
             .dart_tool
+            pubspec.lock
           key: pub-cache-${{ matrix.os }}-${{ matrix.sdk }}
 
       - name: Install dependencies
