@@ -1,3 +1,4 @@
+.cert/
 .coverage/
 .dart_tool/
 .packages
