@@ -19,13 +19,35 @@ jobs:
           sdk: ${{ matrix.sdk }}
 
       - name: Cache packages
+        id: cache
         uses: actions/cache@v3
         with:
           path: |
             ${{ env.PUB_CACHE }}
             .dart_tool
             pubspec.lock
-          key: pub-cache-${{ matrix.os }}-${{ matrix.sdk }}
+            .cert
+          key: caches-${{ matrix.os }}-${{ matrix.sdk }}
+
+      - name: Create self-signed certificate for testing
+        if: steps.cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          mkdir -p .cert
+          cd .cert
+          openssl genrsa -out test.key 2048
+          openssl req -out test.csr -key test.key -new << EOF
+          JP
+          Tokyo
+          Example Town
+          Example Company
+          Example Section
+          localhost
+          test@localhost.com
+
+
+          EOF
+          openssl x509 -req -days 3650 -signkey test.key -in test.csr -out test.crt
 
       - name: Install dependencies
         run: dart pub get
