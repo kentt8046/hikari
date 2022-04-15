@@ -10,13 +10,13 @@ Request _req(
   Map<String, Object>? headers,
   Map<String, Object>? context,
 }) {
-  final body = Body("Hello World");
+  final content = Body(body);
   return Request(
-    contentLength: body.contentLength!,
+    contentLength: content.contentLength!,
     method: "GET",
     uri: Uri.parse(path),
     requestedUri: Uri.parse("http://localhost:3000$path"),
-    body: body,
+    body: content,
     headers: headers,
     context: context,
   );

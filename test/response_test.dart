@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:hikari/hikari.dart';
 import 'package:hikari/src/response.dart';
 import 'package:test/test.dart';
 

@@ -88,7 +88,13 @@ void main() {
         ..get(
             "/",
             (req) => Response.json(
-                {"query": req.query, "fragments": req.requestedUri.fragment}));
+                {"query": req.query, "fragment": req.requestedUri.fragment}));
+
+      expectMatch(
+        router,
+        _req("GET", "/?a=1&b=2#frag"),
+        '{"query":{"a":"1","b":"2"},"fragment":"frag"}',
+      );
     });
 
     test("POST /", () => expectMatch(router, _req("POST", "/"), "post /"));
