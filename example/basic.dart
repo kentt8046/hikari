@@ -1,13 +1,22 @@
 import 'package:hikari/hikari.dart';
 
-Future<void> main() async {
+void main(List<String> args) {
+  launch(
+    setup,
+    args,
+    name: "example",
+    description: "Example",
+  );
+}
+
+Future<void> setup(Server server) async {
   final router = Router()
     ..get("/", (req) => Response.ok(body: "Hello World"))
     ..get("/echo", (req) => Response.ok(body: req.query["echo"] ?? "empty"));
 
   final handler = logRequests().handle(router.handle());
 
-  await Server("0.0.0.0", 3000, "0.0.1").serve(
+  await server.serve(
     handler,
     onStarted: (server) {
       print("listening on http://localhost:${server.port}");
