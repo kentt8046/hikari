@@ -1,5 +1,6 @@
 library hikari;
 
+export 'src/appinfo.dart';
 export 'src/handler.dart';
 export 'src/headers.dart';
 export 'src/launch.dart';
