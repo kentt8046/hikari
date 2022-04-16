@@ -67,7 +67,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
-          name: codecov-umbrella
+          name: env-${{ matrix.os }}-${{ matrix.sdk }}
           token: ${{ secrets.CODECOV_TOKEN }}
           env_vars: OS,DART_SDK
           fail_ci_if_error: true
