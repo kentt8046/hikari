@@ -2,6 +2,7 @@
 .coverage/
 .dart_tool/
 .packages
+.tmp/
 build/
 pubspec.lock
 doc/api/
