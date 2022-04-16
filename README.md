@@ -10,6 +10,7 @@ Dart を 100%生かした（つもりの）サーバサイド Web フレーム�
 ## Example
 
 ```dart
+// main.dart
 import 'package:hikari/hikari.dart';
 
 void main(List<String> args) {
@@ -48,6 +49,17 @@ Middleware logRequests() {
         }
       };
 }
+```
+
+```bash
+# ヘルプを表示
+$ dart main.dart -h
+
+# サーバを起動
+$ dart main.dart serve
+
+# コンパイル
+$ dart main.dart compile
 ```
 
 ### 事前準備
