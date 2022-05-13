@@ -32,9 +32,10 @@ class AppInfo {
     var description =
         const String.fromEnvironment("hikari.appinfo.description");
     var version = const String.fromEnvironment("hikari.appinfo.version");
-    final _buildDate = const String.fromEnvironment("hikari.appinfo.buildDate");
+    final buildDateString =
+        const String.fromEnvironment("hikari.appinfo.buildDate");
     var commitHash = const String.fromEnvironment("hikari.appinfo.commitHash");
-    var buildDate = DateTime.tryParse(_buildDate)?.toLocal();
+    var buildDate = DateTime.tryParse(buildDateString)?.toLocal();
     Directory? projectDir;
 
     if (!compiled) {
